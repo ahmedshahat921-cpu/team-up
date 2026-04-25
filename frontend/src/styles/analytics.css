@@ -1,0 +1,92 @@
+/* ---- Analytics Dashboard ---- */
+.analytics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.analytics-header h1 { margin-bottom: 4px; }
+.analytics-actions { display: flex; gap: 8px; }
+
+.analytics-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.analytics-stat-card {
+  text-align: center;
+  padding: 20px 16px;
+}
+.analytics-stat-card .stat-icon {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px;
+}
+.analytics-stat-card .stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+}
+.analytics-stat-card .stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.chart-card { padding: 0; overflow: hidden; }
+.chart-card-wide { grid-column: 1 / -1; }
+
+.chart-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.chart-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  color: var(--primary-light);
+}
+.chart-body { padding: 20px; }
+
+/* Tooltip */
+.chart-tooltip {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.85rem;
+}
+.chart-tooltip-label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+/* Recharts overrides for light theme */
+[data-theme="light"] .recharts-text { fill: var(--text-muted); }
+[data-theme="light"] .recharts-cartesian-grid-horizontal line,
+[data-theme="light"] .recharts-cartesian-grid-vertical line {
+  stroke: rgba(0,0,0,0.06);
+}
+
+@media (max-width: 1024px) {
+  .analytics-stats { grid-template-columns: repeat(3, 1fr); }
+  .analytics-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .analytics-stats { grid-template-columns: repeat(2, 1fr); }
+}

@@ -1,0 +1,259 @@
+/* ---- Create Project Page Styles ---- */
+.create-project-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.create-project-header h1 { font-size: 1.8rem; margin-bottom: 4px; }
+.create-project-icon {
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+  color: white;
+  flex-shrink: 0;
+}
+
+.create-project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-section {
+  padding: 28px;
+}
+
+.form-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  color: var(--primary-light);
+}
+.form-section-header h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group:last-child { margin-bottom: 0; }
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a78bfa' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.char-count {
+  display: block;
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Skill Input */
+.skill-input-wrapper {
+  position: relative;
+}
+
+.skill-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0; right: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-top: 4px;
+  padding: 4px;
+  z-index: 50;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.skill-suggestion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.skill-suggestion:hover {
+  background: var(--bg-hover);
+  color: var(--primary-light);
+}
+
+.selected-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.skill-tag-removable {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 6px;
+}
+.skill-tag-removable button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.skill-tag-removable button:hover {
+  background: var(--danger);
+  color: white;
+}
+
+.quick-add-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.quick-skill-btn {
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.quick-skill-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary-light);
+  background: rgba(124, 58, 237, 0.08);
+}
+
+/* Team Config */
+.form-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.member-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.counter-btn {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 700;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.counter-btn:hover { background: var(--bg-hover); color: var(--primary-light); }
+.counter-value {
+  width: 48px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: var(--bg-card);
+  line-height: 44px;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+/* Preview */
+.preview-card {
+  border: 1px solid var(--primary);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(167, 139, 250, 0.03));
+}
+.preview-content h4 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.preview-content p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.preview-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.preview-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 8px 0 40px;
+}
+
+.btn-loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+.btn-loading .loader-sm {
+  width: 16px; height: 16px;
+  border-width: 2px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .form-row { flex-direction: column; }
+  .form-section { padding: 20px; }
+  .form-actions { flex-direction: column; }
+  .form-actions .btn { width: 100%; justify-content: center; }
+}
