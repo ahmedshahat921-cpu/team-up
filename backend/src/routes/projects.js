@@ -125,7 +125,7 @@ router.post('/:id/request', authMiddleware, async (req, res) => {
         type: 'join_request',
         title: 'New Join Request',
         message: `Someone requested to join "${project.title}"`,
-        link: `/projects/${req.params.id}`,
+        link: `/projects/${req.params.id}?requestId=${data.id}`,
       });
     }
 

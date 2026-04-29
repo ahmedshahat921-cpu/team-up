@@ -124,10 +124,32 @@ export default function Notifications() {
                 <div className="notif-icon" style={{ color: typeColors[n.type], background: `${typeColors[n.type]}15` }}>
                   {typeIcons[n.type] || <Bell size={18} />}
                 </div>
-                <div className="notif-content">
+                <div className="notif-content" style={{ flex: 1 }}>
                   <div className="notif-title">{n.title}</div>
                   <div className="notif-message">{n.message}</div>
                   <div className="notif-time">{timeAgo(n.created_at)}</div>
+                  {n.type === 'join_request' && n.link?.includes('requestId=') && !n.read && (
+                    <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                      <button className="btn btn-success btn-sm" onClick={(e) => {
+                        e.stopPropagation();
+                        const reqId = new URLSearchParams(n.link.split('?')[1]).get('requestId');
+                        api.patch(`/api/projects/requests/${reqId}`, { status: 'accepted' })
+                          .then(() => markAsRead(n.id))
+                          .catch(() => toast.error('Failed to accept request'));
+                      }}>
+                        Approve
+                      </button>
+                      <button className="btn btn-danger btn-sm" onClick={(e) => {
+                        e.stopPropagation();
+                        const reqId = new URLSearchParams(n.link.split('?')[1]).get('requestId');
+                        api.patch(`/api/projects/requests/${reqId}`, { status: 'rejected' })
+                          .then(() => markAsRead(n.id))
+                          .catch(() => toast.error('Failed to reject request'));
+                      }}>
+                        Reject
+                      </button>
+                    </div>
+                  )}
                 </div>
                 {!n.read && <div className="notif-dot" />}
               </motion.div>

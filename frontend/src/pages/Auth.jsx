@@ -100,7 +100,8 @@ export default function Auth() {
                   <select name="role" className="input" value={form.role} onChange={handleChange}>
                     <option value="student">Student</option>
                     <option value="leader">Team Leader</option>
-                    <option value="professor">Professor (Supervisor)</option>
+                    <option value="professor">Professor / Employee</option>
+                    <option value="admin">Admin</option>
                   </select>
                 </div>
                 <div className="auth-notice" style={{ marginTop: 12, fontSize: '0.85rem', color: 'var(--text-muted)' }}>

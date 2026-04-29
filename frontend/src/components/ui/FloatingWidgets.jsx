@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, ArrowUp, X, Send } from 'lucide-react';
 import { api } from '../../services/api';
 import { useAuthStore } from '../../stores/authStore';
 
 export default function FloatingWidgets() {
+  const location = useLocation();
   const [showScroll, setShowScroll] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState([{ role: 'ai', content: 'Hi! I am TeamUp AI. Need help finding a project or team?' }]);
@@ -50,6 +52,8 @@ export default function FloatingWidgets() {
     }
     setLoading(false);
   };
+
+  if (location.pathname === '/chat') return null;
 
   return (
     <div className="floating-widgets">

@@ -56,7 +56,7 @@ router.post('/register', async (req, res) => {
     }
 
     // Validate role
-    const validRoles = ['student', 'leader', 'professor'];
+    const validRoles = ['student', 'leader', 'professor', 'employee', 'admin'];
     const userRole = validRoles.includes(role) ? role : 'student';
 
     // Verify against university records

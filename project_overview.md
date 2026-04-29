@@ -38,3 +38,7 @@ Based on the application requirements, there are three primary roles:
 * 2026-04-29: Fixed lazy-loading issue on Analysis page by changing Recharts `ResponsiveContainer` width from 100% to 99% in `frontend/src/pages/Analytics.jsx`.
 * 2026-04-29: Rewrote Chat component to be fully real-time and functional using Supabase `private_messages`, including user fetching, optimistic UI, image upload support, and emoji picker in `frontend/src/pages/Chat.jsx`.
 * 2026-04-29: Added "Scheduled Meetings" section with a functional "Join Meeting" button in `frontend/src/pages/Dashboard.jsx`.
+* 2026-04-30: Fixed Chat page wrong button overlap by conditionally hiding `FloatingWidgets.jsx` when on `/chat` route.
+* 2026-04-30: Fixed Chatbot AI endpoint to provide demo responses when no API key is available in `backend/src/routes/ai.js`, ensuring it always responds.
+* 2026-04-30: Fixed Notification System by adding Supabase realtime subscriptions in `notificationStore.js` and rendering Approve/Reject buttons for `join_request` types in `Notifications.jsx`.
+* 2026-04-30: Updated `users` table constraint and `auth.js` to natively support `admin` and `employee` roles, and updated `Auth.jsx` form to provide all role selection options during signup.

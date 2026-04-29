@@ -25,6 +25,12 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
+  useEffect(() => {
+    if (isAuthenticated && user?.id) {
+      useNotificationStore.getState().fetchNotifications(user.id);
+    }
+  }, [isAuthenticated, user?.id]);
+
   const isActive = (path) => location.pathname === path ? 'active' : '';
 
   const handleLogout = () => {

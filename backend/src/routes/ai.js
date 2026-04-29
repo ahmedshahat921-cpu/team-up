@@ -466,7 +466,25 @@ ${historyText ? `Previous conversation:\n${historyText}\n\n` : ''}Student's mess
 
 Please respond helpfully:`;
 
-    const reply = await callGemini(prompt);
+    let reply = 'I am sorry, I encountered an error.';
+    try {
+      reply = await callGemini(prompt);
+      if (!reply) {
+        // Demo mode response if no API key
+        const lowerMsg = message.toLowerCase();
+        if (lowerMsg.includes('project') || lowerMsg.includes('team')) {
+          reply = "I found several projects matching your skills! Check out the 'Projects' page to see your highest compatibility matches. I highly recommend 'AI Chatbot Platform'.";
+        } else if (lowerMsg.includes('skill')) {
+          reply = "Based on your profile, I recommend adding 'React' and 'Node.js' to your skills to increase your project match rate.";
+        } else {
+          reply = "That's an interesting question! As TeamUp AI, I'm here to help you form teams, find projects, and manage your academic work. How can I assist you with that today?";
+        }
+      }
+    } catch (e) {
+      console.error('Chat error:', e);
+      reply = "I'm currently running in demo mode without an API key. Please check out the Projects page for some great suggestions!";
+    }
+
     res.json({ reply });
 
   } catch (err) {

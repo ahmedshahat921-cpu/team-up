@@ -29,9 +29,23 @@
   color: var(--text-primary);
   border: 1px solid var(--border);
 }
-.back-to-top:hover {
-  background: var(--bg-surface-hover);
-  transform: translateY(-3px);
+.chat-input .btn-icon:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.msg-content.typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1.5s steps(4, end) infinite;
+}
+
+@keyframes typing {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
 }
 
 .chatbot-toggle {
