@@ -99,8 +99,7 @@ export default function Auth() {
                   <label>Role</label>
                   <select name="role" className="input" value={form.role} onChange={handleChange}>
                     <option value="student">Student</option>
-                    <option value="leader">Team Leader</option>
-                    <option value="professor">Professor / Employee</option>
+                    <option value="professor">Professor / Supervisor</option>
                     <option value="admin">Admin</option>
                   </select>
                 </div>
