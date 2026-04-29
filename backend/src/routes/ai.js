@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import multer from 'multer';
+import { createRequire } from 'module';
 import { authMiddleware } from '../middleware/auth.js';
 import config from '../config/index.js';
 import supabase from '../config/supabase.js';
 
 const router = Router();
+const require = createRequire(import.meta.url);
 
 // Configure multer for file uploads (store in memory)
 const upload = multer({
@@ -73,8 +75,6 @@ router.post('/extract-skills', authMiddleware, upload.single('cv'), async (req, 
     // 1. If a PDF file was uploaded, extract text from it
     if (req.file) {
       try {
-        const { createRequire } from 'module';
-        const require = createRequire(import.meta.url);
         const pdfParseModule = require('pdf-parse');
         const pdfParse = pdfParseModule.PDFParse || pdfParseModule;
         const pdfData = await pdfParse(req.file.buffer);
@@ -257,7 +257,7 @@ Rules:
     const matches = aiMatches.map(m => {
       const project = available[m.projectIndex - 1];
       if (!project) return null;
-      
+
       const userLower = userSkills.map(s => s.toLowerCase());
       const missing_skills = (project.required_skills || []).filter(s => !userLower.some(us => us.includes(s.toLowerCase()) || s.toLowerCase().includes(us)));
 
