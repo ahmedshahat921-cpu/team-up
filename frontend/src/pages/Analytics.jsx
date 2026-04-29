@@ -191,7 +191,7 @@ export default function Analytics() {
               <h3><BarChart3 size={20} /> Most In-Demand Skills</h3>
             </div>
             <div className="chart-body">
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="99%" height={300}>
                 <BarChart data={skillsDemand} layout="vertical" margin={{ left: 20 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
                   <XAxis type="number" stroke="var(--text-muted)" fontSize={12} />
@@ -211,7 +211,7 @@ export default function Analytics() {
               <h3><PieIcon size={20} /> Project Slots</h3>
             </div>
             <div className="chart-body" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="99%" height={300}>
                 <PieChart>
                   <Pie
                     data={projectSlots}
@@ -235,7 +235,7 @@ export default function Analytics() {
               <h3><Target size={20} /> Application Status</h3>
             </div>
             <div className="chart-body" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="99%" height={300}>
                 <PieChart>
                   <Pie
                     data={applicationStats}
@@ -258,7 +258,7 @@ export default function Analytics() {
               <h3><TrendingUp size={20} /> Weekly Activity</h3>
             </div>
             <div className="chart-body">
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="99%" height={300}>
                 <AreaChart data={activityData}>
                   <defs>
                     <linearGradient id="gradProjects" x1="0" y1="0" x2="0" y2="1">

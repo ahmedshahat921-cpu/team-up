@@ -417,10 +417,19 @@ export default function Profile() {
                       <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{m.projectTitle}</div>
                         <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{m.reason}</div>
-                        {m.required_skills && (
-                          <div style={{ display: 'flex', gap: 4, marginTop: 6, flexWrap: 'wrap' }}>
+                        {m.required_skills && m.required_skills.length > 0 && (
+                          <div style={{ display: 'flex', gap: 4, marginTop: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Required:</span>
                             {m.required_skills.slice(0, 4).map(s => (
                               <span key={s} className="skill-tag" style={{ fontSize: '0.65rem', padding: '2px 6px' }}>{s}</span>
+                            ))}
+                          </div>
+                        )}
+                        {m.missing_skills && m.missing_skills.length > 0 && (
+                          <div style={{ display: 'flex', gap: 4, marginTop: 4, flexWrap: 'wrap', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--danger)' }}>Missing:</span>
+                            {m.missing_skills.slice(0, 4).map(s => (
+                              <span key={s} className="skill-tag" style={{ fontSize: '0.65rem', padding: '2px 6px', background: 'rgba(239, 68, 68, 0.1)', borderColor: 'rgba(239, 68, 68, 0.3)', color: 'var(--danger)' }}>{s}</span>
                             ))}
                           </div>
                         )}

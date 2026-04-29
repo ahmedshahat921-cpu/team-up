@@ -73,7 +73,10 @@ router.post('/extract-skills', authMiddleware, upload.single('cv'), async (req, 
     // 1. If a PDF file was uploaded, extract text from it
     if (req.file) {
       try {
-        const pdfParse = (await import('pdf-parse')).default;
+        const { createRequire } from 'module';
+        const require = createRequire(import.meta.url);
+        const pdfParseModule = require('pdf-parse');
+        const pdfParse = pdfParseModule.PDFParse || pdfParseModule;
         const pdfData = await pdfParse(req.file.buffer);
         cvText = pdfData.text;
         console.log(`PDF parsed successfully: ${cvText.length} characters extracted`);
@@ -209,7 +212,8 @@ router.post('/match-teams', authMiddleware, async (req, res) => {
       const matches = available.map(p => {
         const required = (p.required_skills || []).map(s => s.toLowerCase());
         const userLower = userSkills.map(s => s.toLowerCase());
-        const matchCount = required.filter(s => userLower.some(us => us.includes(s) || s.includes(us))).length;
+        const missing_skills = p.required_skills.filter(s => !userLower.some(us => us.includes(s.toLowerCase()) || s.toLowerCase().includes(us)));
+        const matchCount = required.length - missing_skills.length;
         const compatibility = required.length > 0
           ? Math.round((matchCount / required.length) * 100)
           : 50;
@@ -221,6 +225,7 @@ router.post('/match-teams', authMiddleware, async (req, res) => {
             ? `${matchCount}/${required.length} required skills match your profile`
             : 'General fit based on project requirements',
           required_skills: p.required_skills,
+          missing_skills: missing_skills,
           member_count: p.member_count,
           max_members: p.max_members,
         };
@@ -252,12 +257,17 @@ Rules:
     const matches = aiMatches.map(m => {
       const project = available[m.projectIndex - 1];
       if (!project) return null;
+      
+      const userLower = userSkills.map(s => s.toLowerCase());
+      const missing_skills = (project.required_skills || []).filter(s => !userLower.some(us => us.includes(s.toLowerCase()) || s.toLowerCase().includes(us)));
+
       return {
         projectId: project.id,
         projectTitle: project.title,
         compatibility: m.compatibility,
         reason: m.reason,
         required_skills: project.required_skills,
+        missing_skills: missing_skills,
         member_count: project.member_count,
         max_members: project.max_members,
       };

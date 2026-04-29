@@ -60,13 +60,13 @@ export default function Notifications() {
     setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
     const unread = notifications.filter(n => !n.read && n.id !== id).length;
     setUnreadCount(unread);
-    try { await api.patch(`/api/notifications/${id}`, { read: true }); } catch {}
+    try { await api.patch(`/api/notifications/${id}`, { read: true }); } catch { }
   };
 
   const markAllRead = async () => {
     setNotifications(prev => prev.map(n => ({ ...n, read: true })));
     setUnreadCount(0);
-    try { await api.patch('/api/notifications/read-all'); } catch {}
+    try { await api.patch('/api/notifications/read-all'); } catch { }
     toast.success('All notifications marked as read');
   };
 

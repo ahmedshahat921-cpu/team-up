@@ -24,13 +24,14 @@ export default function FloatingWidgets() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSend = async (e) => {
+  const handleSend = async (e, text = null) => {
     e.preventDefault();
-    if (!input.trim() || loading) return;
+    const messageToSend = text || input;
+    if (!messageToSend.trim() || loading) return;
 
-    const userMsg = { role: 'user', content: input };
+    const userMsg = { role: 'user', content: messageToSend };
     setMessages(prev => [...prev, userMsg]);
-    setInput('');
+    if (!text) setInput('');
     setLoading(true);
 
     try {
@@ -82,22 +83,42 @@ export default function FloatingWidgets() {
               <button onClick={() => setChatOpen(false)} className="close-btn"><X size={18} /></button>
             </div>
             
-            <div className="chat-messages">
+            <div className="chat-messages" style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px', overflowY: 'auto', flex: 1 }}>
               {messages.map((m, i) => (
-                <div key={i} className={`msg ${m.role}`}>
+                <div key={i} className={`msg ${m.role}`} style={{ alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start', background: m.role === 'user' ? 'var(--primary)' : 'var(--card-bg)', padding: '8px 12px', borderRadius: '8px', maxWidth: '85%' }}>
                   <div className="msg-content">{m.content}</div>
                 </div>
               ))}
-              {loading && <div className="msg ai"><div className="msg-content typing">...</div></div>}
+              {loading && <div className="msg ai" style={{ alignSelf: 'flex-start', background: 'var(--card-bg)', padding: '8px 12px', borderRadius: '8px' }}><div className="msg-content typing">...</div></div>}
             </div>
 
-            <form onSubmit={handleSend} className="chat-input">
+            <div className="suggested-questions" style={{ display: 'flex', gap: '8px', overflowX: 'auto', padding: '8px', borderTop: '1px solid var(--border)', whiteSpace: 'nowrap', '&::-webkit-scrollbar': { display: 'none' } }}>
+              {[
+                "What are the highest percentage projects I can join?",
+                "Which teams need my skills?",
+                "Show me my recent activity",
+                "How can I improve my skill match score?",
+                "What meetings are scheduled today?"
+              ].map((q, i) => (
+                <button 
+                  key={i} 
+                  onClick={() => { setInput(q); handleSend({ preventDefault: () => {} }, q); }}
+                  disabled={loading}
+                  style={{ background: 'var(--primary-light, rgba(124, 58, 237, 0.2))', color: 'var(--text)', border: 'none', borderRadius: '16px', padding: '6px 12px', fontSize: '12px', cursor: 'pointer', flexShrink: 0 }}
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={e => handleSend(e, input)} className="chat-input" style={{ display: 'flex', gap: '8px', padding: '12px', borderTop: '1px solid var(--border)' }}>
               <input 
                 type="text" 
                 value={input} 
                 onChange={e => setInput(e.target.value)} 
                 placeholder="Ask me anything..." 
                 className="input"
+                style={{ flex: 1 }}
               />
               <button type="submit" disabled={loading} className="btn btn-primary btn-icon">
                 <Send size={16} />

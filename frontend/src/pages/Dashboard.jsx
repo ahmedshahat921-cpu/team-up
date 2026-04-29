@@ -145,6 +145,29 @@ export default function Dashboard() {
               ))}
             </div>
           </motion.div>
+
+          {/* Scheduled Meetings */}
+          <motion.div className="card" initial="hidden" animate="visible" variants={fadeUp} custom={7} style={{ gridColumn: '1 / -1' }}>
+            <div className="card-header-row">
+              <h2><Clock size={20} /> Scheduled Meetings</h2>
+            </div>
+            <div className="task-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16 }}>
+              {recentProjects.filter(p => p.meeting_url || true).slice(0, 2).map((p, i) => (
+                <div key={`meet-${p.id}`} className="card card-glow" style={{ padding: 16, background: 'var(--bg-surface)' }}>
+                  <h4 style={{ marginBottom: 4 }}>{p.title} Weekly Sync</h4>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                    <span className="text-muted" style={{ fontSize: '0.85rem' }}>
+                      Tomorrow at 10:00 AM
+                    </span>
+                    <span className="badge badge-info">30 min</span>
+                  </div>
+                  <a href={p.meeting_url || 'https://meet.jit.si/teamup-default'} target="_blank" rel="noreferrer" className="btn btn-primary" style={{ width: '100%' }}>
+                    Join Meeting
+                  </a>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
         {/* Quick Actions */}
