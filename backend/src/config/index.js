@@ -18,6 +18,8 @@ export default {
     domain: process.env.JITSI_DOMAIN || 'meet.jit.si',
   },
   cors: {
-    origin: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL, 'http://localhost:5173'] : '*',
+    origin: function (origin, callback) {
+      callback(null, true);
+    },
   },
 };
