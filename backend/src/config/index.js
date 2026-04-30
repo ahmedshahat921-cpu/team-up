@@ -8,8 +8,8 @@ export default {
     expiresIn: '7d',
   },
   supabase: {
-    url: process.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co',
-    serviceKey: process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder',
+    url: process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || 'https://placeholder.supabase.co',
+    serviceKey: process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || 'placeholder',
   },
   gemini: {
     apiKey: process.env.GEMINI_API_KEY || '',
@@ -18,6 +18,6 @@ export default {
     domain: process.env.JITSI_DOMAIN || 'meet.jit.si',
   },
   cors: {
-    origin: ['http://localhost:5173', 'http://localhost:5174'],
+    origin: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL, 'http://localhost:5173'] : '*',
   },
 };
